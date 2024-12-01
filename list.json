@@ -1,1 +1,5 @@
-{}
+{
+    "SAMP.lua": ["samp"],
+    "imgui": ["imgui.lua", "MoonImGui.dll"],
+    "mimgui": ["mimgui"]
+}
