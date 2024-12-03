@@ -19,7 +19,7 @@ EventsOn('list:update', (status, list, errorText) => {
     document.getElementById('loader').style.display = 'none';
     if (status) {
         document.querySelectorAll('.lib').forEach((el) => el.remove());
-        Object.keys(list).forEach((name) => createLibCheckbox(name));
+        list.forEach((name) => createLibCheckbox(name));
     } else {
         document.getElementById('error-reason').textContent = errorText ?? 'Unknown Error';
         document.getElementById('load-error').style.display = 'block';
@@ -32,14 +32,9 @@ addEventListener('DOMContentLoaded', () => {
     document.getElementById('install').onclick = () => InstallSelectedLibs(document.getElementById('path').value, getSelectedItems());
 });
 
-function getSelectedItems() {
-    var res = Array.from(document.querySelectorAll('input[type=checkbox]:checked')).map((el) => el.id);
-    console.log('selected:', res);
-    return res
-    // document.querySelectorAll('input[type=checkbox]').forEach((el) => console.log(el.id))
-}
+const getSelectedItems = () => Array.from(document.querySelectorAll('input[type=checkbox]:checked')).map((el) => el.id)
 
-function createLibCheckbox(libName) {
+function createLibCheckbox(libName, checked = true) {
     /*
         <div class="lib">
             <input id="SAMP.lua" type="checkbox">
@@ -54,6 +49,7 @@ function createLibCheckbox(libName) {
     const checkbox = document.createElement('input');
     checkbox.id = libName;
     checkbox.type = 'checkbox';
+    checkbox.checked = checked;
 
     const label = document.createElement('label');
     label.htmlFor = libName;

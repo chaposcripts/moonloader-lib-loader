@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"os"
+	"strings"
 
 	runtime "github.com/wailsapp/wails/v2/pkg/runtime"
 )
@@ -85,11 +86,15 @@ func (a *App) InstallSelectedLibs(path string, selectedLibs []string) error {
 
 	// extract zip to temp folder
 	runtime.EventsEmit(a.ctx, "status:set", "extracting")
-	err = extractAllFiles(selectedLibs, path+"\\moonloader-libs-temp.zip", path+"\\moonloader")
+	list, err := extractAllFiles(selectedLibs, path+"\\moonloader-libs-temp.zip", path+"\\moonloader")
 	if err != nil {
 		runtime.MessageDialog(a.ctx, runtime.MessageDialogOptions{Title: "Ошибка", Message: fmt.Sprintf("Ошибка распаковки: %s", err.Error())})
 		return err
 	}
+	runtime.MessageDialog(a.ctx, runtime.MessageDialogOptions{
+		Title:   "Успешно!",
+		Message: fmt.Sprintf("В ходе установки были установлены следующие файлы: %s", strings.Join((list), "\n")),
+	})
 
 	runtime.EventsEmit(a.ctx, "status:set", "copying")
 	// move selected libs to game folder

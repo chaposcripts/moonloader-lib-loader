@@ -6,6 +6,7 @@ import (
 	"io"
 	"net/http"
 	"os"
+	"strings"
 )
 
 const zipURL string = "https://github.com/chaposcripts/moonloader-lib-loader/raw/refs/heads/main/libs.zip"
@@ -26,32 +27,28 @@ func loadZip(url, path string) error {
 	return err
 }
 
-func isFileInList() bool {
-	// for _, moduleName := range list {
-	// 	for module, files := range libsData {
-	// 		if module == moduleName {
-	// 			for _, file := range files {
-	// 				if file == targetFile {
-	// 					return true
-	// 				}
-	// 			}
-	// 		}
-	// 	}
-	// }
-	return false
+func isFileInSelectedList(file string, selectedModules []string) (bool, string) {
+	for _, listedModule := range selectedModules {
+		if strings.HasPrefix(file, listedModule+"/") {
+			return true, listedModule
+		}
+	}
+	return false, ""
 }
 
-func extractAllFiles(selectedLibs []string, zipPath, dest string) error {
+func extractAllFiles(selectedLibs []string, zipPath, dest string) ([]string, error) {
+	installedFiles := []string{}
 	zipFile, err := zip.OpenReader(zipPath)
 	if err != nil {
-		return err
+		return installedFiles, err
 	}
 	for _, file := range zipFile.File {
-		if !isFileInList() {
+		isSelected, moduleName := isFileInSelectedList(file.Name, selectedLibs)
+		if !isSelected {
 			fmt.Println("File not selected, skipping", file.Name)
 			continue
 		}
-		filePath := fmt.Sprintf("%s\\%s", dest, file.Name)
+		filePath := fmt.Sprintf("%s\\lib\\%s", dest, strings.Replace(file.Name, moduleName+"/", "", 1))
 		fmt.Println("ZIP", file.Name, filePath, file.FileInfo().IsDir())
 		if _, err := os.Stat(filePath); !os.IsNotExist(err) {
 			os.Remove(filePath)
@@ -63,19 +60,20 @@ func extractAllFiles(selectedLibs []string, zipPath, dest string) error {
 		} else {
 			reader, err := file.Open()
 			if err != nil {
-				return err
+				return installedFiles, err
 			}
 			bytes, err := io.ReadAll(reader)
 			if err != nil {
-				return err
+				return installedFiles, err
 			}
 
 			err = os.WriteFile(filePath, bytes, 0644)
 			if err != nil {
-				return err
+				return installedFiles, err
 			}
 			fmt.Println("File", filePath, "created")
+			installedFiles = append(installedFiles, filePath)
 		}
 	}
-	return nil
+	return installedFiles, nil
 }

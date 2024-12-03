@@ -32,24 +32,3 @@ func loadData() error {
 	}
 	return err
 }
-
-// func moveSelectedLibs(selectedLibs []string) error {
-// 	for libName, files := range libsData {
-// 		for _, it := range selectedLibs {
-// 			if it == libName {
-// 				for _, fname := range files {
-// 					defaultFile := fmt.Sprintf("./temp_libs_zip/%s", fname)
-// 					newFile := fmt.Sprintf("./moonloader/lib/%s", fname)
-// 					// fmt.Println("MOVING \"%s\" to \"%s\"", fmt.Sprintf("./temp_libs_zip/%s", fname), fmt.Sprintf("./moonloader/lib/%s", fname))
-// 					isDir := isDirectory(defaultFile)
-// 					if isDir {
-// 						copyDir(defaultFile, newFile)
-// 					} else {
-// 						copyFile(defaultFile, newFile)
-// 					}
-// 				}
-// 			}
-// 		}
-// 	}
-// 	return nil
-// }
