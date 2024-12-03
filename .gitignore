@@ -23,5 +23,5 @@ go.work.sum
 
 # env file
 .env
-scr/build
-scr/frontend
+src/build
+src/frontend
