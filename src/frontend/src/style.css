@@ -1,0 +1,96 @@
+html {
+    background-color: rgba(27, 38, 54, 1);
+    text-align: center;
+    color: white;
+}
+
+body {
+    margin: 0;
+    width: 320px;
+    /* height: 450px; */
+    /* background-color: #272727; */
+    color: white;
+    font-family: "Nunito", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+    "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+}
+
+@font-face {
+    font-family: "Nunito";
+    font-style: normal;
+    font-weight: 400;
+    src: local(""),
+    url("assets/fonts/nunito-v16-latin-regular.woff2") format("woff2");
+}
+
+#app {
+    height: 100vh;
+    text-align: center;
+}
+
+.container {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    width: 314px;
+    height: 390px;
+    margin: auto;
+    /* background-color: ; */
+    background-color: #272727;
+}
+
+#path, .install {
+    background-color: #181818;
+    outline: none;
+    border-radius: 5px;
+    border-style: none;
+    height: 25px;
+    color: white;
+}
+
+.inactive {
+    background-color: rgba(27, 38, 54, 1);
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.libs-list {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 294px;
+    height: 295px;
+    background-color: #181818;
+    border-radius: 10px;
+    overflow: auto;
+    padding: 10px;
+}
+
+.lib {
+    display: flex;
+}
+
+.loader {
+    margin-top: 130px;
+    display: flex;
+    flex-direction: column;
+}
+
+.spinner {
+    margin: auto;
+    width: 48px;
+    height: 48px;
+    border: 5px solid #FFF;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+} 

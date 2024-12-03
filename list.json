@@ -1,5 +1,27 @@
 {
-    "SAMP.lua": ["samp"],
-    "imgui": ["imgui.lua", "MoonImGui.dll"],
-    "mimgui": ["mimgui"]
+    "SAMP.lua": [
+        "samp/",
+        "samp/events/",
+        "samp/events/bitstream_io.lua",
+        "samp/events/core.lua",
+        "samp/events/extra_types.lua",
+        "samp/events/handlers.lua",
+        "samp/events/utils.lua",
+        "samp/events.lua",
+        "samp/raknet.lua",
+        "samp/synchronization.lua"
+    ],
+    "imgui": [
+        "imgui.lua", 
+        "MoonImGui.dll"
+    ],
+    "mimgui": [
+        "mimgui/",
+        "mimgui/cdefs.lua",
+        "mimgui/cimguidx9.dll",
+        "mimgui/dx9.lua",
+        "mimgui/imgui.lua",
+        "mimgui/init.lua",
+        "mimgui/win32.lua"
+    ]
 }
