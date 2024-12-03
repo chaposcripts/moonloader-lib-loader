@@ -25,3 +25,4 @@ go.work.sum
 .env
 src/build
 src/frontend
+libs_old.zip

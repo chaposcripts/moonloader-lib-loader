@@ -26,18 +26,18 @@ func loadZip(url, path string) error {
 	return err
 }
 
-func isFileInList(list []string, targetFile string) bool {
-	for _, moduleName := range list {
-		for module, files := range libsData {
-			if module == moduleName {
-				for _, file := range files {
-					if file == targetFile {
-						return true
-					}
-				}
-			}
-		}
-	}
+func isFileInList() bool {
+	// for _, moduleName := range list {
+	// 	for module, files := range libsData {
+	// 		if module == moduleName {
+	// 			for _, file := range files {
+	// 				if file == targetFile {
+	// 					return true
+	// 				}
+	// 			}
+	// 		}
+	// 	}
+	// }
 	return false
 }
 
@@ -47,7 +47,7 @@ func extractAllFiles(selectedLibs []string, zipPath, dest string) error {
 		return err
 	}
 	for _, file := range zipFile.File {
-		if !isFileInList(selectedLibs, file.Name) {
+		if !isFileInList() {
 			fmt.Println("File not selected, skipping", file.Name)
 			continue
 		}
